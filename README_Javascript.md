@@ -2,11 +2,17 @@
 
 ### Table of Contents
 
-| No. | Questions                                                                                                                 |
-|-----|---------------------------------------------------------------------------------------------------------------------------|
-| 1   | [What are the possible ways to create objects in JavaScript](#what-are-the-possible-ways-to-create-objects-in-javascript) |
-| 2   | [How to copy object](#how-to-copy-object)                                                                                 |
-| 3   | [What is prototype chain](#what-is-a-prototype-chain)                                                                     |
+| No. | Questions                                                                                                                                               |
+|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | [What are the possible ways to create objects in JavaScript](#what-are-the-possible-ways-to-create-objects-in-javascript)                               |
+| 2   | [How to copy object](#how-to-copy-object)                                                                                                               |
+| 3   | [What is prototype chain](#what-is-a-prototype-chain)                                                                                                   |
+| 4   | [What is a callback function](#what-is-a-callback-function)                                                                                             |
+| 5   | [What are the three states of promise](#what-are-the-three-states-of-promise)                                                                           |
+| 6   | [What is a promise](#what-is-a-promise)                                                                                                                 |
+| 7   | [What is memoization](#what-is-memoization)                                                                                                             |
+| 8   | [What are the differences between cookie local storage and session storage](#what-are-the-differences-between-cookie-local-storage-and-session-storage) |
+| 9   | [Explain event emitter](#explain-event-emitter)                                                                                                         |
 
 1. ### What are the possible ways to create objects in JavaScript
 
@@ -169,5 +175,138 @@
 
 
    **[⬆ Back to Top](#table-of-contents)**
+
+---
+
+4. ### What is a callback function 
+
+   **Callback function**: A callback function is a function passed into another function as an argument.
+   ```javascript
+        function callbackFunction(name) {
+          console.log("Hello " + name);
+        }
+
+        function outerFunction(callback) {
+          let name = prompt("Please enter your name.");
+          callback(name);
+        }
+
+        outerFunction(callbackFunction);
+   ```    
+
+**[⬆ Back to Top](#table-of-contents)**
+
+---
+
+5. ### What are the three states of promise
+   Promises have three states:
+
+    1. **Pending:** This is an initial state of the Promise before an operation begins
+    2. **Fulfilled:** This state indicates that the specified operation was completed.
+    3. **Rejected:** This state indicates that the operation did not complete. In this case an error value will be thrown.
+
+**[⬆ Back to Top](#table-of-contents)**
+
+---
+
+6. ### What is a promise
+A promise is an object that may produce a single value some time in the future with either a resolved value or a reason that it’s not resolved(for example, network error). It will be in one of the 3 possible states: fulfilled, rejected, or pending.
+
+The syntax of Promise creation looks like below,
+
+  ```javascript
+    const promise = new Promise(function (resolve, reject) {
+      // promise description
+    });
+    ```
+
+    The usage of a promise would be as below,
+
+    ```javascript
+    const promise = new Promise(
+      (resolve) => {
+        setTimeout(() => {
+          resolve("I'm a Promise!");
+        }, 5000);
+      },
+      (reject) => {}
+    );
+
+    promise.then((value) => console.log(value));
+  ```
+
+The action flow of a promise will be as below,
+
+![Screenshot](public/image/promises.png)
+**[⬆ Back to Top](#table-of-contents)**
+
+---
+
+7. ### What is memoization
+
+   Memoization is a programming technique which attempts to increase a function’s performance by caching its previously computed results. Each time a memoized function is called, its parameters are used to index the cache. If the data is present, then it can be returned, without executing the entire function. Otherwise the function is executed and then the result is added to the cache.
+   Let's take an example of adding function with memoization,
+
+    ```javascript
+    const memoizAddition = () => {
+      let cache = {};
+      return (value) => {
+        if (value in cache) {
+          console.log("Fetching from cache");
+          return cache[value]; // Here, cache.value cannot be used as property name starts with the number which is not a valid JavaScript  identifier. Hence, can only be accessed using the square bracket notation.
+        } else {
+          console.log("Calculating result");
+          let result = value + 20;
+          cache[value] = result;
+          return result;
+        }
+      };
+    };
+    // returned function from memoizAddition
+    const addition = memoizAddition();
+    console.log(addition(20)); //output: 40 calculated
+    console.log(addition(20)); //output: 40 cached
+    ```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+---
+
+8. ### What are the differences between cookie local storage and session storage
+   Below are some of the differences between cookie, local storage and session storage,
+
+   | Feature                           | Cookie                             | Local storage    | Session storage     |
+   | --------------------------------- | ---------------------------------- | ---------------- | ------------------- |
+   | Accessed on client or server side | Both server-side & client-side     | client-side only | client-side only    |
+   | Lifetime                          | As configured using Expires option | until deleted    | until tab is closed |
+   | SSL support                       | Supported                          | Not supported    | Not supported       |
+   | Maximum data size                 | 4KB                                | 5 MB             | 5MB                 |
+
+**[⬆ Back to Top](#table-of-contents)**
+
+---
+
+9. ### Explain event emitter
+
+   **Event Emitter** If you worked with JavaScript in the browser, you know how much of the interaction of the user is handled through events: mouse clicks, keyboard button presses, reacting to mouse movements, and so on.
+
+On the backend side, Node.js offers us the option to build a similar system using the events module.
+
+This module, in particular, offers the EventEmitter class, which we'll use to handle our events.
+
+   ```javascript
+      const EventEmitter = require('events');
+
+      const eventEmitter = new EventEmitter();
+
+      eventEmitter.on('start', () => {
+        console.log('started');
+      });
+        
+      eventEmitter.emit('start');
+   ```    
+
+
+**[⬆ Back to Top](#table-of-contents)**
 
 ---
