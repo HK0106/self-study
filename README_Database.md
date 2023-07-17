@@ -1,4 +1,4 @@
-## Javascript
+## Database
 
 ### Table of Contents
 
