@@ -2,11 +2,16 @@
 
 ### Table of Contents
 
-| No. | Questions                                                                        |
-|-----|----------------------------------------------------------------------------------|
-| 1   | [What is database normalization?](#what-is-database-normalization)               |
-| 2   | [What are database normalization forms?](#what-are-database-normalization-forms) |
-| 3   | [What is Denormalization.](#what-is-denormalization)                             |
+| No. | Questions                                                                                                                                                       |
+|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | [What is database normalization?](#what-is-database-normalization)                                                                                              |
+| 2   | [What are database normalization forms?](#what-are-database-normalization-forms)                                                                                |
+| 3   | [What is Denormalization.](#what-is-denormalization)                                                                                                            |
+| 4   | [When execute an insert query in SQL the data is not immediately saved to disk](#when-execute-an-insert-query-in-SQL-the-data-is-not-immediately-saved-to-disk) |
+| 5   | [What is index?](#)                                                                                                                                             |
+| 6   | [How index work?](#)                                                                                                                                            |
+| 6   | [Why we need index?](#)                                                                                                                                         |
+| 6   | [When we use index?](#)                                                                                                                                         |
 
 1. ### What is database normalization
 
@@ -72,8 +77,34 @@ Meeting all the requirements of third normal form and it should not have multi- 
 
 3. ### What is Denormalization
 
-DeNormalization is a technique used to access the data from higher to lower normal forms of database. It is also process of introducing redundancy into a table by incorporating data from the related tables.
+    DeNormalization is a technique used to access the data from higher to lower normal forms of database.
+It is also process of introducing redundancy into a table by incorporating data from the related tables.
 
    **[⬆ Back to Top](#table-of-contents)**
+   
+---
+
+4. ### When execute an insert query in SQL the data is not immediately saved to disk
+
+    When you execute an INSERT query in MySQL to insert data into a table, the data is not immediately saved directly to the hard disk of the database. Instead, MySQL follows a process known as the ACID (Atomicity, Consistency, Isolation, Durability) properties to ensure data integrity and durability.
+    
+````
+    When you execute the INSERT query, MySQL performs the following steps:
+
+        1.Validates the query syntax and table structure.
+        2.Checks for any constraints or triggers defined on the table.
+        3.Writes the data to the database buffer cache in memory.
+        4.The data in the buffer cache is periodically flushed to the disk based on various factors such as system load,
+         configuration settings, or commit statements.
+        5.MySQL uses a technique called write-ahead logging (WAL) to record changes to a transaction log file before writing them to disk.
+         This log file ensures durability by allowing the database to recover data in case of system failures.
+        6.Once the data is written to disk and the transaction is committed, it is considered durable and persistent.
+````
+
+   The actual timing and frequency of disk writes depend on various factors such as system configuration, workload, and storage engine settings. MySQL employs sophisticated mechanisms to optimize disk writes and ensure efficient data storage and retrieval.
+    
+   It's worth noting that some advanced configurations, such as using the MEMORY storage engine or using a RAID controller with a battery-backed cache, can impact the behavior of data writes and caching. However, in a typical MySQL setup, the data is first stored in memory and then periodically flushed to disk to ensure durability.
+
+**[⬆ Back to Top](#table-of-contents)**
 
 ---
