@@ -13,6 +13,8 @@
 | 7   | [What is memoization](#what-is-memoization)                                                                                                             |
 | 8   | [What are the differences between cookie local storage and session storage](#what-are-the-differences-between-cookie-local-storage-and-session-storage) |
 | 9   | [Explain event emitter](#explain-event-emitter)                                                                                                         |
+| 10  | [For loop in JS](#for-loop-in-js)                                                                                                                       |
+| 11  | [Array manipulating in JS](#array-manipulating-in-js)                                                                                                   |
 
 1. ### What are the possible ways to create objects in JavaScript
 
@@ -307,6 +309,119 @@ This module, in particular, offers the EventEmitter class, which we'll use to ha
    ```    
 
 
+**[⬆ Back to Top](#table-of-contents)**
+
+---
+
+10. ### For loop in js
+
+   **For** 
+    with for we initial variable to count, check condition and insert or degree count variable 
+   ```javascript
+      for ([initialization];[condition];[final-expression]){
+        //Block of code
+      }
+
+      for(var i = 0; i < 10; i++) {
+        console.log(i)
+      }
+   ```    
+
+**forEach**
+will run through each element in array by index order and exec function
+   ```javascript
+    // Note: forEach will not exectue function if the element not have value
+    // Cant break foorEach loop with return , continue, break
+    // Canot wait async await function in forEach
+
+    arrayName.forEach(function(currentValue, index, array){
+      //function body
+    })    
+
+    var arr = [10, 20, "hi", , {}];
+    
+    arr.forEach(function (item, index) {
+      console.log(' arr[' + index + '] is ' + item);
+    });
+   ```    
+
+
+**[⬆ Back to Top](#table-of-contents)**
+
+
+**Map**
+will run through each element in array but **Map** will return new array 
+   ```javascript
+    var newArray= oldArray.map(function (currentValue, index, array){
+    //Return element for the newArray
+    });
+
+    var num = [1, 5, 10, 15];
+    var doubles = num.map(function(x) {
+      return x * 2;
+    });
+   ```    
+
+**For...in**
+use to loop though object it can use to array with key is index of array
+   ```javascript
+    for (variableName in object) {
+      //Block of code
+    }
+
+    var obj = {a: 1, b: 2, c: 3};
+    for (var prop in obj) {
+      console.log('obj.'+prop+'='+obj[prop]);
+    };
+    // result
+    obj.a=1
+    obj.b=2
+    obj.c=3
+   ```    
+
+**For...of**
+Release in ES6, this function help user to iterator the most object from Array, String, Map, WeakMap, Set...
+   ```javascript
+    for (variable of iterable) {
+      //Block of code
+    }
+
+    var str= 'paul';
+    for (var value of str) {
+      console.log(value);
+    }
+    //Result
+
+    "p"
+    "a"
+    "u"
+    "l"
+
+    //Other sample
+    let itobj = new Map([['x', 0], ['y', 1], ['z', 2]]);
+    
+    for (let kv of itobj) {
+      console.log(kv);
+    }
+    // ['x', 0]
+    // ['y', 1]
+    // ['z', 2]
+    
+    for (let [key, value] of itobj) {
+      console.log(value);
+    }
+    
+    //0
+    //1
+    //2
+   ```    
+
+---
+
+
+11. ### Array manipulating in js
+
+![Screenshot](public/image/js-array-manipulating.png)
 **[⬆ Back to Top](#table-of-contents)**
 
 ---
